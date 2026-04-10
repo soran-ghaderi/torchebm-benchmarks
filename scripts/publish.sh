@@ -56,8 +56,16 @@ done
 printf '\n]\n' >> "$manifest"
 echo "Updated manifest.json"
 
+# Update sitemap.xml lastmod dates
+sitemap="sitemap.xml"
+if [ -f "$sitemap" ]; then
+    today=$(date -u +%Y-%m-%d)
+    sed -i "s|<lastmod>[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}</lastmod>|<lastmod>$today</lastmod>|g" "$sitemap"
+    echo "Updated sitemap.xml (lastmod: $today)"
+fi
+
 if $push; then
-    git add "$results_dir/"
+    git add "$results_dir/" "$sitemap"
     git commit -m "bench: update results"
     git push
     echo "Done! Published and pushed."

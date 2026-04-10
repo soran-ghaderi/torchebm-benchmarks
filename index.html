@@ -3,7 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard — TorchEBM Benchmarks</title>
+    <title>TorchEBM Benchmarks — Performance Dashboard for Energy-Based Models</title>
+    <meta name="description" content="Interactive performance benchmarks for TorchEBM, a PyTorch library for Energy-Based Models. Track median time, throughput, GPU memory, and scaling across integrators, samplers, losses, and more.">
+    <meta name="keywords" content="TorchEBM, benchmarks, energy-based models, PyTorch, performance, GPU, CUDA, machine learning, deep learning, sampling, MCMC, Langevin dynamics">
+    <meta name="author" content="Soran Ghaderi">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://soran-ghaderi.github.io/torchebm-benchmarks/">
+    <link rel="icon" type="image/svg+xml" href="assets/penrose_nabla.svg">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="TorchEBM Benchmarks — Performance Dashboard">
+    <meta property="og:description" content="Interactive performance benchmarks for TorchEBM. Track timing, throughput, GPU memory, and scaling across modules and devices.">
+    <meta property="og:url" content="https://soran-ghaderi.github.io/torchebm-benchmarks/">
+    <meta property="og:site_name" content="TorchEBM Benchmarks">
+    <meta property="og:image" content="https://soran-ghaderi.github.io/torchebm-benchmarks/assets/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="TorchEBM Benchmarks Dashboard">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="TorchEBM Benchmarks — Performance Dashboard">
+    <meta name="twitter:description" content="Interactive performance benchmarks for TorchEBM. Track timing, throughput, GPU memory, and scaling across modules and devices.">
+    <meta name="twitter:image" content="https://soran-ghaderi.github.io/torchebm-benchmarks/assets/og-image.png">
+    <meta name="twitter:image:alt" content="TorchEBM Benchmarks Dashboard">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "TorchEBM Benchmarks",
+        "description": "Interactive performance benchmarks dashboard for TorchEBM, a PyTorch library for Energy-Based Models.",
+        "url": "https://soran-ghaderi.github.io/torchebm-benchmarks/",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "author": {
+            "@type": "Person",
+            "name": "Soran Ghaderi",
+            "url": "https://github.com/soran-ghaderi"
+        },
+        "isPartOf": {
+            "@type": "SoftwareSourceCode",
+            "name": "TorchEBM",
+            "url": "https://github.com/soran-ghaderi/torchebm",
+            "programmingLanguage": "Python",
+            "runtimePlatform": "PyTorch"
+        }
+    }
+    </script>
+
     <link rel="stylesheet" href="assets/style.css">
     <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
 </head>
@@ -43,7 +93,7 @@
         </div>
         <nav class="header-tabs">
             <div class="header-tabs-inner">
-                <a href="index.html" class="tab-link active">
+                <a href="index.html" class="tab-link active" aria-current="page">
                     <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
                     Dashboard
                 </a>
@@ -135,6 +185,7 @@
         </div>
     </footer>
 
+    <noscript><p style="text-align:center;padding:2rem;">This dashboard requires JavaScript to load and display benchmark data.</p></noscript>
     <script src="assets/app.js"></script>
 </body>
 </html>

@@ -9,8 +9,14 @@ const RESULTS_BASE = 'benchmarks/results';
 // Theme
 // ---------------------------------------------------------------------------
 (function initTheme() {
-    const saved = localStorage.getItem('torchebm-theme');
-    if (saved) document.documentElement.setAttribute('data-theme', saved);
+    const params = new URLSearchParams(window.location.search);
+    const forced = params.get('theme');
+    if (forced === 'light' || forced === 'dark') {
+        document.documentElement.setAttribute('data-theme', forced);
+    } else {
+        const saved = localStorage.getItem('torchebm-theme');
+        if (saved) document.documentElement.setAttribute('data-theme', saved);
+    }
     const btn = document.getElementById('themeToggle');
     if (btn) btn.addEventListener('click', () => {
         const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';

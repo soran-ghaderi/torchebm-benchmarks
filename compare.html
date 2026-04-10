@@ -3,7 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compare — TorchEBM Benchmarks</title>
+    <title>Compare Benchmark Runs — TorchEBM Benchmarks</title>
+    <meta name="description" content="Side-by-side comparison of TorchEBM benchmark runs. Analyze speedups, regressions, and environment differences between any two benchmark results.">
+    <meta name="keywords" content="TorchEBM, benchmark comparison, performance regression, speedup analysis, energy-based models, PyTorch">
+    <meta name="author" content="Soran Ghaderi">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://soran-ghaderi.github.io/torchebm-benchmarks/compare.html">
+    <link rel="icon" type="image/svg+xml" href="assets/penrose_nabla.svg">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Compare Benchmark Runs — TorchEBM">
+    <meta property="og:description" content="Side-by-side comparison of TorchEBM benchmark runs. Analyze speedups, regressions, and environment differences.">
+    <meta property="og:url" content="https://soran-ghaderi.github.io/torchebm-benchmarks/compare.html">
+    <meta property="og:site_name" content="TorchEBM Benchmarks">
+    <meta property="og:image" content="https://soran-ghaderi.github.io/torchebm-benchmarks/assets/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Compare Benchmark Runs — TorchEBM">
+    <meta name="twitter:description" content="Side-by-side comparison of TorchEBM benchmark runs. Analyze speedups, regressions, and environment differences.">
+    <meta name="twitter:image" content="https://soran-ghaderi.github.io/torchebm-benchmarks/assets/og-image.png">
+
     <link rel="stylesheet" href="assets/style.css">
     <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
 </head>
@@ -51,7 +74,7 @@
                     <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
                     History
                 </a>
-                <a href="compare.html" class="tab-link active">
+                <a href="compare.html" class="tab-link active" aria-current="page">
                     <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M4 9h4v11H4zm6-5h4v16h-4zm6 8h4v8h-4z"/></svg>
                     Compare
                 </a>
@@ -121,6 +144,7 @@
         </div>
     </footer>
 
+    <noscript><p style="text-align:center;padding:2rem;">This dashboard requires JavaScript to load and display benchmark data.</p></noscript>
     <script src="assets/app.js"></script>
 </body>
 </html>
