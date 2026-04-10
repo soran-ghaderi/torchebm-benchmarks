@@ -21,6 +21,25 @@ const RESULTS_BASE = 'benchmarks/results';
 })();
 
 // ---------------------------------------------------------------------------
+// GitHub stats (version, stars, forks) — fetched live
+// ---------------------------------------------------------------------------
+(function fetchGitHubStats() {
+    fetch('https://api.github.com/repos/soran-ghaderi/torchebm')
+        .then(r => r.ok ? r.json() : null)
+        .then(data => {
+            if (!data) return;
+            document.querySelectorAll('#ghStars').forEach(el => el.textContent = data.stargazers_count);
+            document.querySelectorAll('#ghForks').forEach(el => el.textContent = data.forks_count);
+        }).catch(() => {});
+    fetch('https://api.github.com/repos/soran-ghaderi/torchebm/releases/latest')
+        .then(r => r.ok ? r.json() : null)
+        .then(data => {
+            if (!data) return;
+            document.querySelectorAll('#ghVersion').forEach(el => el.textContent = data.tag_name);
+        }).catch(() => {});
+})();
+
+// ---------------------------------------------------------------------------
 // Plotly helpers
 // ---------------------------------------------------------------------------
 const SCALE_COLORS = { small: '#b0eb00', medium: '#bc8cff', large: '#f0883e' };
