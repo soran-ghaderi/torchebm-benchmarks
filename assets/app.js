@@ -23,9 +23,9 @@ const RESULTS_BASE = 'benchmarks/results';
 // ---------------------------------------------------------------------------
 // Plotly helpers
 // ---------------------------------------------------------------------------
-const SCALE_COLORS = { small: '#58a6ff', medium: '#bc8cff', large: '#f0883e' };
+const SCALE_COLORS = { small: '#b0eb00', medium: '#bc8cff', large: '#f0883e' };
 const MODULE_COLORS = {
-    integrators: '#58a6ff', losses: '#3fb950', samplers: '#bc8cff',
+    integrators: '#b0eb00', losses: '#3fb950', samplers: '#bc8cff',
     interpolants: '#f0883e', models: '#f85149', unknown: '#8b949e'
 };
 
@@ -33,18 +33,33 @@ function isDark() {
     return document.documentElement.getAttribute('data-theme') === 'dark';
 }
 
+function deepMerge(target, source) {
+    const out = Object.assign({}, target);
+    for (const key of Object.keys(source)) {
+        if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])
+            && target[key] && typeof target[key] === 'object' && !Array.isArray(target[key])) {
+            out[key] = deepMerge(target[key], source[key]);
+        } else {
+            out[key] = source[key];
+        }
+    }
+    return out;
+}
+
 function plotlyLayout(extra) {
     const dark = isDark();
-    return Object.assign({
-        paper_bgcolor: dark ? '#1c2128' : '#ffffff',
-        plot_bgcolor: dark ? '#161b22' : '#f6f8fa',
+    const base = {
+        paper_bgcolor: dark ? '#1e1e1e' : '#ffffff',
+        plot_bgcolor: dark ? '#161616' : '#f6f8fa',
         font: { family: '-apple-system, BlinkMacSystemFont, sans-serif', color: dark ? '#8b949e' : '#656d76', size: 12 },
-        margin: { l: 60, r: 30, t: 20, b: 80 },
-        xaxis: { gridcolor: dark ? '#21262d' : '#e1e4e8', zerolinecolor: dark ? '#30363d' : '#d0d7de' },
-        yaxis: { gridcolor: dark ? '#21262d' : '#e1e4e8', zerolinecolor: dark ? '#30363d' : '#d0d7de' },
-        legend: { bgcolor: 'rgba(0,0,0,0)', font: { size: 11 } },
+        margin: { l: 60, r: 20, t: 40, b: 20, pad: 4 },
+        xaxis: { gridcolor: dark ? '#222222' : '#e1e4e8', zerolinecolor: dark ? '#2e2e2e' : '#d0d7de', automargin: true },
+        yaxis: { gridcolor: dark ? '#222222' : '#e1e4e8', zerolinecolor: dark ? '#2e2e2e' : '#d0d7de', automargin: true },
+        legend: { bgcolor: 'rgba(0,0,0,0)', font: { size: 11 }, orientation: 'h', x: 0.5, xanchor: 'center', y: 1.02, yanchor: 'bottom' },
         hoverlabel: { font: { family: 'monospace', size: 12 } },
-    }, extra || {});
+        autosize: true,
+    };
+    return extra ? deepMerge(base, extra) : base;
 }
 
 function plotlyConfig() {
