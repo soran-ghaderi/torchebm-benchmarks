@@ -1,0 +1,84 @@
+name: Deploy Benchmark Site
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check required files exist
+        run: |
+          for f in index.html history.html compare.html assets/app.js assets/style.css benchmarks/results/manifest.json; do
+            if [ ! -f "$f" ]; then
+              echo "::error::Missing required file: $f"
+              exit 1
+            fi
+          done
+          echo "All required files present."
+
+      - name: Validate manifest.json and referenced files
+        run: |
+          node -e "
+            const fs = require('fs');
+            const manifest = JSON.parse(fs.readFileSync('benchmarks/results/manifest.json', 'utf-8'));
+            if (!Array.isArray(manifest) || manifest.length === 0) {
+              console.error('manifest.json is empty or not an array');
+              process.exit(1);
+            }
+            let errors = 0;
+            for (const fname of manifest) {
+              const path = 'benchmarks/results/' + fname;
+              if (!fs.existsSync(path)) {
+                console.error('Missing file referenced in manifest:', path);
+                errors++;
+              } else {
+                try {
+                  const data = JSON.parse(fs.readFileSync(path, 'utf-8'));
+                  const isPytest = data.benchmarks && data.machine_info;
+                  const isLegacy = data.results && data.environment;
+                  if (!isPytest && !isLegacy) {
+                    console.error('Unrecognized format:', fname);
+                    errors++;
+                  }
+                } catch (e) {
+                  console.error('Invalid JSON in', fname, e.message);
+                  errors++;
+                }
+              }
+            }
+            console.log('Validated', manifest.length, 'files,', errors, 'errors');
+            if (errors > 0) process.exit(1);
+          "
+
+  deploy:
+    name: Deploy to GitHub Pages
+    if: github.event_name != 'pull_request'
+    needs: validate
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - id: deployment
+        uses: actions/deploy-pages@v4
