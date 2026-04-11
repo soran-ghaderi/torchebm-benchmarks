@@ -568,6 +568,56 @@ tr.row-regression { background: var(--red-bg); }
     gap: 1rem;
 }
 
+/* --- About section (index.html) --- */
+.about-section {
+    margin-top: 3rem;
+    padding: 2rem;
+    border-radius: 0.75rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+}
+
+.about-section h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: var(--text);
+}
+
+.about-content p {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+}
+
+.about-content a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.about-content a:hover {
+    text-decoration: underline;
+}
+
+.about-author {
+    color: var(--text) !important;
+}
+
+.about-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.about-links a {
+    color: var(--muted);
+    transition: color var(--transition);
+}
+
+.about-links a:hover {
+    color: var(--accent);
+}
+
 /* --- Footer (always dark for logo readability) --- */
 .footer {
     text-align: center;
@@ -637,6 +687,23 @@ tr.row-regression { background: var(--red-bg); }
     margin-top: 0.4rem;
     font-size: 0.8rem;
     color: rgba(255,255,255,0.6);
+}
+
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 0.85rem;
+    margin-top: 0.6rem;
+}
+
+.footer-social a {
+    color: rgba(255,255,255,0.45);
+    transition: color 150ms;
+    display: inline-flex;
+}
+
+.footer-social a:hover {
+    color: #b0eb00;
 }
 
 .footer-cite {
